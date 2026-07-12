@@ -1,32 +1,32 @@
 import Foundation
 
-struct MercuryHand {
+struct MercuryRelic {
     let name: String
     let purpose: String
     let capabilities: [String]
 }
 
-final class MercuryHands {
-    static let shared = MercuryHands()
+final class MercuryRelics {
+    static let shared = MercuryRelics()
 
-    let availableHands: [MercuryHand] = [
-        MercuryHand(
-            name: "Shortcut Hand",
+    let availableRelics: [MercuryRelic] = [
+        MercuryRelic(
+            name: "Shortcut Relic",
             purpose: "Advanced iOS automation and workflows",
             capabilities: ["App Intents", "Shortcuts", "Automation chains"]
         ),
-        MercuryHand(
-            name: "Siri Hand",
+        MercuryRelic(
+            name: "Siri Relic",
             purpose: "Native iOS assistant collaboration",
             capabilities: ["Voice triggers", "Siri integration", "Intent routing"]
         ),
-        MercuryHand(
-            name: "Creation Hand",
+        MercuryRelic(
+            name: "Creation Relic",
             purpose: "Laboratory and Forge operations",
             capabilities: ["Code", "Design", "Brainstorming", "Prototyping"]
         ),
-        MercuryHand(
-            name: "Execution Hand",
+        MercuryRelic(
+            name: "Execution Relic",
             purpose: "Immortal task completion systems",
             capabilities: ["Planning", "Automation", "Project execution"]
         )
