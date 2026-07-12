@@ -1,0 +1,17 @@
+{
+  "name": "mercury",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "chat": "node src/index.js chat",
+    "codex": "node src/index.js codex"
+  },
+  "dependencies": {
+    "openai": "^4.10.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

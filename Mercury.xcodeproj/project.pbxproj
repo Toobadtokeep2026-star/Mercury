@@ -1,0 +1,252 @@
+// !$*UTF8*$!
+{
+  archiveVersion = 1;
+  classes = {};
+  objectVersion = 54;
+  objects = {
+    111111111111111100000000 /* Mercury project */ = {
+      isa = PBXProject;
+      attributes = {
+        LastUpgradeCheck = 1430;
+      };
+      buildConfigurationList = 111111111111111100000004 /* Build configuration list for PBXProject "Mercury" */;
+      compatibilityVersion = "Xcode 10.0";
+      developmentRegion = en;
+      hasScannedForEncodings = 0;
+      knownRegions = (
+        en,
+      );
+      mainGroup = 111111111111111100000001;
+      productRefGroup = 111111111111111100000003;
+      projectDirPath = "";
+      projectRoot = "";
+      targets = (
+        111111111111111100000007 /* Mercury */,
+      );
+    };
+    111111111111111100000001 /* Main Group */ = {
+      isa = PBXGroup;
+      children = (
+        111111111111111100000002 /* Mercury */,
+      );
+      sourceTree = "<group>";
+    };
+    111111111111111100000002 /* Mercury */ = {
+      isa = PBXGroup;
+      children = (
+        11111111111111110000000F /* AppDelegate.swift */,
+        111111111111111100000010 /* SceneDelegate.swift */,
+        111111111111111100000011 /* MainViewController.swift */,
+        111111111111111100000012 /* DetailViewController.swift */,
+        11111111111111110000000C /* Info.plist */,
+        11111111111111110000000D /* LaunchScreen.storyboard */,
+        11111111111111110000000E /* Assets.xcassets */,
+      );
+      path = Mercury;
+      sourceTree = "<group>";
+    };
+    111111111111111100000003 /* Products */ = {
+      isa = PBXGroup;
+      children = (
+        111111111111111100000009 /* Mercury.app */,
+      );
+      name = Products;
+      sourceTree = "<group>";
+    };
+    111111111111111100000004 /* Build configuration list for PBXProject "Mercury" */ = {
+      isa = XCConfigurationList;
+      buildConfigurations = (
+        111111111111111100000005 /* Debug */,
+        111111111111111100000006 /* Release */,
+      );
+      defaultConfigurationIsVisible = 0;
+      defaultConfigurationName = Release;
+    };
+    111111111111111100000005 /* Debug */ = {
+      isa = XCBuildConfiguration;
+      buildSettings = {
+        DEVELOPMENT_TEAM = "";
+        PRODUCT_NAME = "$(TARGET_NAME)";
+        INFOPLIST_FILE = Mercury/Info.plist;
+        TARGETED_DEVICE_FAMILY = "1";
+        IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+        CODE_SIGN_STYLE = Automatic;
+        SWIFT_VERSION = 5.0;
+      };
+      name = Debug;
+    };
+    111111111111111100000006 /* Release */ = {
+      isa = XCBuildConfiguration;
+      buildSettings = {
+        DEVELOPMENT_TEAM = "";
+        PRODUCT_NAME = "$(TARGET_NAME)";
+        INFOPLIST_FILE = Mercury/Info.plist;
+        TARGETED_DEVICE_FAMILY = "1";
+        IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+        CODE_SIGN_STYLE = Automatic;
+        SWIFT_VERSION = 5.0;
+        GCC_PREPROCESSOR_DEFINITIONS = (
+          "$(inherited)",
+          "NDEBUG=1",
+        );
+      };
+      name = Release;
+    };
+    111111111111111100000007 /* Mercury */ = {
+      isa = PBXNativeTarget;
+      buildConfigurationList = 111111111111111100000008 /* Build configuration list for PBXNativeTarget "Mercury" */;
+      buildPhases = (
+        11111111111111110000000A /* Sources */,
+        11111111111111110000000B /* Resources */,
+      );
+      buildRules = (
+      );
+      dependencies = (
+      );
+      name = Mercury;
+      productName = Mercury;
+      productReference = 111111111111111100000009 /* Mercury.app */;
+      productType = "com.apple.product-type.application";
+    };
+    111111111111111100000008 /* Build configuration list for PBXNativeTarget "Mercury" */ = {
+      isa = XCConfigurationList;
+      buildConfigurations = (
+        1111111111111111000000A /* Debug */,
+        1111111111111111000000B /* Release */,
+      );
+      defaultConfigurationIsVisible = 0;
+      defaultConfigurationName = Release;
+    };
+    1111111111111111000000A /* Debug */ = {
+      isa = XCBuildConfiguration;
+      buildSettings = {
+        ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+        INFOPLIST_FILE = Mercury/Info.plist;
+        PRODUCT_BUNDLE_IDENTIFIER = com.toobadtokeep2026.mercury;
+        PRODUCT_NAME = Mercury;
+        SWIFT_VERSION = 5.0;
+        TARGETED_DEVICE_FAMILY = "1";
+        IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+        CODE_SIGN_STYLE = Automatic;
+      };
+      name = Debug;
+    };
+    1111111111111111000000B /* Release */ = {
+      isa = XCBuildConfiguration;
+      buildSettings = {
+        ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+        INFOPLIST_FILE = Mercury/Info.plist;
+        PRODUCT_BUNDLE_IDENTIFIER = com.toobadtokeep2026.mercury;
+        PRODUCT_NAME = Mercury;
+        SWIFT_VERSION = 5.0;
+        TARGETED_DEVICE_FAMILY = "1";
+        IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+        CODE_SIGN_STYLE = Automatic;
+        GCC_PREPROCESSOR_DEFINITIONS = (
+          "$(inherited)",
+          "NDEBUG=1",
+        );
+      };
+      name = Release;
+    };
+    111111111111111100000009 /* Mercury.app */ = {
+      isa = PBXFileReference;
+      explicitFileType = "wrapper.application";
+      name = Mercury.app;
+      path = Mercury.app;
+      sourceTree = BUILT_PRODUCTS_DIR;
+    };
+    11111111111111110000000A /* Sources */ = {
+      isa = PBXSourcesBuildPhase;
+      buildActionMask = 2147483647;
+      files = (
+        111111111111111100000015 /* AppDelegate.swift in Sources */,
+        111111111111111100000016 /* SceneDelegate.swift in Sources */,
+        111111111111111100000017 /* MainViewController.swift in Sources */,
+        111111111111111100000018 /* DetailViewController.swift in Sources */,
+      );
+      runOnlyForDeploymentPostprocessing = 0;
+    };
+    11111111111111110000000B /* Resources */ = {
+      isa = PBXResourcesBuildPhase;
+      buildActionMask = 2147483647;
+      files = (
+        111111111111111100000019 /* LaunchScreen.storyboard in Resources */,
+        11111111111111110000001A /* Assets.xcassets in Resources */,
+      );
+      runOnlyForDeploymentPostprocessing = 0;
+    };
+    11111111111111110000000C /* Info.plist */ = {
+      isa = PBXFileReference;
+      lastKnownFileType = text.plist.xml;
+      path = Info.plist;
+      sourceTree = "<group>";
+    };
+    11111111111111110000000D /* LaunchScreen.storyboard */ = {
+      isa = PBXFileReference;
+      lastKnownFileType = file.storyboard;
+      path = Base.lproj/LaunchScreen.storyboard;
+      sourceTree = "<group>";
+    };
+    11111111111111110000000E /* Assets.xcassets */ = {
+      isa = PBXFileReference;
+      lastKnownFileType = folder.assetcatalog;
+      name = Assets.xcassets;
+      path = Assets.xcassets;
+      sourceTree = "<group>";
+    };
+    11111111111111110000000F /* AppDelegate.swift */ = {
+      isa = PBXFileReference;
+      lastKnownFileType = sourcecode.swift;
+      name = AppDelegate.swift;
+      path = AppDelegate.swift;
+      sourceTree = "<group>";
+    };
+    1111111111111111000010 /* SceneDelegate.swift */ = {
+      isa = PBXFileReference;
+      lastKnownFileType = sourcecode.swift;
+      name = SceneDelegate.swift;
+      path = SceneDelegate.swift;
+      sourceTree = "<group>";
+    };
+    1111111111111111000011 /* MainViewController.swift */ = {
+      isa = PBXFileReference;
+      lastKnownFileType = sourcecode.swift;
+      name = MainViewController.swift;
+      path = MainViewController.swift;
+      sourceTree = "<group>";
+    };
+    1111111111111111000012 /* DetailViewController.swift */ = {
+      isa = PBXFileReference;
+      lastKnownFileType = sourcecode.swift;
+      name = DetailViewController.swift;
+      path = DetailViewController.swift;
+      sourceTree = "<group>";
+    };
+    1111111111111111000015 /* AppDelegate.swift in Sources */ = {
+      isa = PBXBuildFile;
+      fileRef = 11111111111111110000000F /* AppDelegate.swift */;
+    };
+    1111111111111111000016 /* SceneDelegate.swift in Sources */ = {
+      isa = PBXBuildFile;
+      fileRef = 1111111111111111000010 /* SceneDelegate.swift */;
+    };
+    1111111111111111000017 /* MainViewController.swift in Sources */ = {
+      isa = PBXBuildFile;
+      fileRef = 1111111111111111000011 /* MainViewController.swift */;
+    };
+    1111111111111111000018 /* DetailViewController.swift in Sources */ = {
+      isa = PBXBuildFile;
+      fileRef = 1111111111111111000012 /* DetailViewController.swift */;
+    };
+    1111111111111111000019 /* LaunchScreen.storyboard in Resources */ = {
+      isa = PBXBuildFile;
+      fileRef = 11111111111111110000D /* LaunchScreen.storyboard */;
+    };
+    111111111111111100001A /* Assets.xcassets in Resources */ = {
+      isa = PBXBuildFile;
+      fileRef = 11111111111111110000E /* Assets.xcassets */;
+    };
+  };
+  rootObject = 111111111111111100000000 /* Mercury project */;
+}

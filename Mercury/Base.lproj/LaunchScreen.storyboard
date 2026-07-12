@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="launchVC">
+    <scenes>
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController storyboardIdentifier="LaunchViewController" id="launchVC" customClass="UIViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <color key="backgroundColor" name="systemBackgroundColor" catalog="system"/>
+                        <subviews>
+                            <label opaque="NO" clipsToBounds="YES" multipleTouchEnabled="YES" contentMode="left" text="Mercury" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="label1">
+                                <rect key="frame" x="87" y="407" width="240" height="82"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <color key="textColor" name="labelColor" catalog="system"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="label1" firstAttribute="centerX" secondItem="v1" secondAttribute="centerX" id="c1"/>
+                            <constraint firstItem="label1" firstAttribute="centerY" secondItem="v1" secondAttribute="centerY" id="c2"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fr1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
