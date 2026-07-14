@@ -13,6 +13,7 @@ Current repository characteristics:
 - Package manager: npm.
 - Main entry point: `src/index.js`.
 - OpenAI SDK dependency: `openai` npm package.
+- OpenAI API style: Responses API for both chat and code-generation examples.
 - Primary use case: runnable CLI examples for `chat` and `codex` modes.
 
 ## Repository Layout
@@ -20,7 +21,7 @@ Current repository characteristics:
 ```text
 .
 ├── AGENTS.md          # Instructions for Codex and future agent sessions
-├── README.md          # Human-facing project overview and usage examples
+├── README.md          # Human-facing setup, architecture, usage, and contributor guide
 ├── package.json       # npm scripts, dependency declarations, Node engine
 └── src/
     ├── access.js      # Role/permission helpers used by CLI modes
@@ -65,8 +66,8 @@ Current repository characteristics:
 2. Print a short banner and prompt echo.
 3. Call `ensurePermission(...)` with the mode-specific permission.
 4. If access is denied, print a user-facing error and return without throwing.
-5. Call the relevant OpenAI API.
-6. Extract and print the response with a fallback string when no content is returned.
+5. Call the OpenAI Responses API.
+6. Extract and print `response.output_text` with a fallback string when no content is returned.
 
 Keep new mode runners consistent with this pattern unless intentionally refactoring the CLI architecture.
 
@@ -100,6 +101,7 @@ Keep new mode runners consistent with this pattern unless intentionally refactor
 ### OpenAI API Usage
 
 - Keep model names, endpoints, and SDK usage easy to update.
+- `OPENAI_CHAT_MODEL` and `OPENAI_CODE_MODEL` may override the default model for the chat and code-generation examples.
 - If changing OpenAI APIs, verify against official OpenAI documentation because model availability and SDK interfaces can change.
 - Avoid adding compatibility wrappers unless the project grows enough to justify them.
 - Prefer explicit request parameters so examples are readable.
@@ -110,7 +112,7 @@ There is currently no formal test suite in `package.json`. Until tests are added
 
 1. `npm install` if dependencies are absent.
 2. `npm run chat -- "<prompt>"` when validating chat behavior and a valid `OPENAI_API_KEY` is available.
-3. `npm run codex -- "<prompt>"` when validating codex behavior and the configured model/API remains available.
+3. `npm run codex -- "<prompt>"` when validating code-generation behavior and the configured model/API remains available.
 4. `node --check src/index.js` plus checks for any changed JavaScript files to catch syntax errors without calling external APIs.
 5. `git diff --check` before committing to catch whitespace errors.
 
@@ -141,13 +143,13 @@ When adding a test framework in the future, wire it to `npm test` and document t
 
 - Treat API keys and tokens as secrets even in examples.
 - Never add real secrets to source files, docs, tests, fixtures, PR descriptions, or commit messages.
-- Before committing, scan documentation changes for accidental credentials.
+- Before committing, scan documentation changes for accidental credentials. If a real-looking key appears in docs, replace it with a placeholder such as `<your-api-key>` before committing.
 - Prefer environment variables for all sensitive configuration.
 - If a secret is discovered in repository history or documentation, flag it immediately and recommend rotation; do not copy it into new files.
 
 ## Documentation Conventions
 
-- Keep `README.md` user-focused: installation, environment variables, commands, and examples.
+- Keep `README.md` user-focused and contributor-ready: overview, requirements, setup, environment variables, commands, architecture, validation, extension guidance, and troubleshooting.
 - Keep `AGENTS.md` agent-focused: architecture, conventions, workflow, and repository-specific instructions.
 - Use fenced code blocks for commands and repository trees.
 - Keep command examples copy-pasteable.
@@ -186,6 +188,10 @@ OPENAI_API_KEY=<your-api-key> npm run chat -- "Explain recursion"
 
 # Run the codex example
 OPENAI_API_KEY=<your-api-key> npm run codex -- "Generate a JavaScript function to sort an array"
+
+# Override the default chat or code-generation model
+OPENAI_CHAT_MODEL=gpt-4.1-mini npm run chat -- "Explain recursion"
+OPENAI_CODE_MODEL=gpt-4.1-mini npm run codex -- "Generate a JavaScript function to sort an array"
 
 # Enable local all-access mode for examples
 ALL_ACCESS=true OPENAI_API_KEY=<your-api-key> npm run chat -- "Explain recursion"
