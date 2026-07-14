@@ -19,7 +19,7 @@ const usage = () => {
   console.log("  npm run codex -- 'Generate a JavaScript function to sort an array'");
 };
 
-if (!prompt || !runners[normalizedMode]) {
+if (!prompt || !["chat", "codex"].includes(normalizedMode)) {
   usage();
   process.exit(0);
 }
@@ -27,6 +27,15 @@ if (!prompt || !runners[normalizedMode]) {
 if (!process.env.OPENAI_API_KEY) {
   console.error("ERROR: OPENAI_API_KEY is not set.");
   process.exit(1);
+}
+
+switch (normalizedMode) {
+  case "chat":
+    await runChatExample(prompt);
+    break;
+  case "codex":
+    await runCodexExample(prompt);
+    break;
 }
 
 const run = await runners[normalizedMode]();

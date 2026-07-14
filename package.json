@@ -6,10 +6,11 @@
   "scripts": {
     "start": "node src/index.js",
     "chat": "node src/index.js chat",
-    "codex": "node src/index.js codex"
+    "codex": "node src/index.js codex",
+    "test": "node --test"
   },
   "dependencies": {
-    "openai": "^4.10.0"
+    "openai": "^6.47.0"
   },
   "engines": {
     "node": ">=18"
