@@ -1,9 +1,13 @@
 import OpenAI from "openai";
 import { ensurePermission, currentUser } from "./access.js";
 
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+function createClient() {
+  return new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+}
 
-export async function runCodexExample(prompt) {
+export async function runCodexExample(prompt, options = {}) {
+  const client = options.client ?? createClient();
+
   console.log("Running Codex reference example...");
   console.log(`Prompt: ${prompt}\n`);
 

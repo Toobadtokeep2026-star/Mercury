@@ -1,9 +1,13 @@
 import OpenAI from "openai";
 import { ensurePermission, currentUser } from "./access.js";
 
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+function createClient() {
+  return new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+}
 
-export async function runChatExample(prompt) {
+export async function runChatExample(prompt, options = {}) {
+  const client = options.client ?? createClient();
+
   console.log("Running ChatGPT reference example...");
   console.log(`Prompt: ${prompt}\n`);
 

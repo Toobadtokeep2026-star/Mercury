@@ -1,11 +1,16 @@
-const DEFAULT_ROLE = process.env.USER_ROLE || "user";
-const ALL_ACCESS = String(process.env.ALL_ACCESS || "").toLowerCase() === "true";
-
 const DEFAULT_ROLES = {
   admin: ["*"],
   user: ["chat.run", "codex.run"],
   guest: []
 };
+
+function defaultRole() {
+  return process.env.USER_ROLE || "user";
+}
+
+function allAccessEnabled() {
+  return String(process.env.ALL_ACCESS || "").toLowerCase() === "true";
+}
 
 function getRoles() {
   try {
@@ -17,18 +22,18 @@ function getRoles() {
 }
 
 function hasPermission(role, permission) {
-  if (ALL_ACCESS) return true;
+  if (allAccessEnabled()) return true;
   const roles = getRoles();
   const perms = roles[role] || [];
   if (perms.includes("*")) return true;
   return perms.includes(permission);
 }
 
-export function can(permission, user = { role: DEFAULT_ROLE }) {
+export function can(permission, user = { role: defaultRole() }) {
   return hasPermission(user.role, permission);
 }
 
-export function ensurePermission(permission, user = { role: DEFAULT_ROLE }) {
+export function ensurePermission(permission, user = { role: defaultRole() }) {
   if (!hasPermission(user.role, permission)) {
     const err = new Error(`Permission denied: ${permission}`);
     err.code = "E_PERMISSION";
@@ -37,7 +42,7 @@ export function ensurePermission(permission, user = { role: DEFAULT_ROLE }) {
 }
 
 export function currentUser() {
-  return { role: process.env.USER_ROLE || DEFAULT_ROLE };
+  return { role: defaultRole() };
 }
 
 export default { can, ensurePermission, currentUser };

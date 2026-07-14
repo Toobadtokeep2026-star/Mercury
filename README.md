@@ -9,9 +9,18 @@ This project includes a small access utility used by the CLI examples to gate fu
 
 ```bash
 export ALL_ACCESS=true
-export OPENAI_API_KEY=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
+export OPENAI_API_KEY=<your-api-key>
 npm run chat -- "Explain recursion"
 ```
 
 - Alternatively set a role via `USER_ROLE` (default: `user`). Roles and permissions can be overridden with `ROLES_JSON` (JSON map).
+## Testing
+
+Run the unit and integration tests with:
+
+```bash
+npm test
+```
+
+The test suite uses Node.js built-in test runner, mocks OpenAI client calls for mode runner coverage, and exercises CLI behavior without making external API requests.
 
