@@ -1,9 +1,6 @@
 import OpenAI from "openai";
 import { ensurePermission, currentUser } from "./access.js";
 
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const CHAT_MODEL = process.env.OPENAI_CHAT_MODEL || "gpt-4.1-mini";
-
 export async function runChatExample(prompt) {
   console.log("Running ChatGPT reference example...");
   console.log(`Prompt: ${prompt}\n`);
@@ -18,10 +15,19 @@ export async function runChatExample(prompt) {
     throw err;
   }
 
-  const response = await client.responses.create({
-    model: CHAT_MODEL,
-    instructions: "You are a helpful assistant that explains things clearly and concisely.",
-    input: prompt,
+  const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  const completion = await client.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [
+      {
+        role: "system",
+        content: "You are a helpful assistant that explains things clearly and concisely."
+      },
+      {
+        role: "user",
+        content: prompt
+      }
+    ],
     temperature: 0.7,
     max_output_tokens: 500
   });
