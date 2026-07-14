@@ -1,95 +1,45 @@
 # Mercury
 
+Mercury is a small Node.js/OpenAI reference project with command-line examples for chat and code-generation flows behind a lightweight role-based access gate.
+
+## Requirements
+
+- Node.js 18 or newer
+- npm
+- An OpenAI API key provided through `OPENAI_API_KEY`
+
+## Installation
+
+```bash
+npm install
+```
+
+## Configuration
+
+Set your API key before running an example:
+
+```bash
+export OPENAI_API_KEY=<your-api-key>
+```
+
+Optional model overrides are available when you want to test a different supported model without changing source code:
+
+```bash
+export OPENAI_CHAT_MODEL=gpt-4.1-mini
+export OPENAI_CODE_MODEL=gpt-4.1-mini
+```
+
 Mercury is a small private Node.js reference project that demonstrates how to run OpenAI-powered command-line examples behind a lightweight role-based access gate. It currently includes two CLI modes:
 
 - `chat`: sends a conversational prompt to a chat-completions model.
 - `codex`: sends a code-generation style prompt to a completions model.
 
-The project is intentionally compact so new contributors can understand the full request flow, access-control model, and local setup quickly.
-
-## Requirements
-
-- Node.js 18 or newer.
-- npm, included with Node.js.
-- An OpenAI API key exported as `OPENAI_API_KEY` for commands that call the API.
-
-> Do not commit real API keys. Use placeholders such as `<your-api-key>` in documentation and examples.
-
-## Project Layout
-
-```text
-.
-├── AGENTS.md          # Developer and agent guide for this repository
-├── README.md          # Human-facing setup, architecture, and usage guide
-├── package.json       # npm scripts, dependencies, and Node engine requirement
-└── src/
-    ├── access.js      # Role and permission helpers
-    ├── chat.js        # Chat example runner
-    ├── codex.js       # Code-generation example runner
-    └── index.js       # CLI argument parsing, usage output, and dispatch
-```
-
-## Setup
-
-1. Clone the repository and enter it:
-
-   ```bash
-   git clone <repository-url>
-   cd Mercury
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Export your OpenAI API key for the current shell session:
-
-   ```bash
-   export OPENAI_API_KEY=<your-api-key>
-   ```
-
-4. Optionally enable local all-access mode while experimenting:
-
-   ```bash
-   export ALL_ACCESS=true
-   ```
-
-5. Run a CLI example:
-
-   ```bash
-   npm run chat -- "Explain recursion in simple terms"
-   ```
-
-## Running the CLI
-
-Mercury exposes npm scripts that invoke `src/index.js` with a mode and prompt.
+- Enable all-access mode for local development:
 
 ```bash
-npm run chat -- "Explain recursion in simple terms"
-npm run codex -- "Generate a JavaScript function to sort an array"
-```
-
-The prompt begins after `--`. If no prompt is supplied, Mercury prints usage information and exits without calling the API.
-
-## Configuration
-
-Mercury reads all runtime configuration from environment variables.
-
-| Variable | Default | Purpose |
-| --- | --- | --- |
-| `OPENAI_API_KEY` | none | Required before any CLI mode runs. |
-| `USER_ROLE` | `user` | Selects the role used by permission checks. |
-| `ALL_ACCESS` | `false` | When set to `true`, bypasses all permission checks for local development. |
-| `ROLES_JSON` | built-in roles | Optional JSON object that overrides the role-to-permissions map. |
-
-Example custom role configuration:
-
-```bash
-export USER_ROLE=reviewer
-export ROLES_JSON='{"reviewer":["chat.run"],"guest":[]}'
-npm run chat -- "Summarize what this project does"
+export ALL_ACCESS=true
+export OPENAI_API_KEY=<your-api-key>
+npm run chat -- "Explain recursion"
 ```
 
 ## Access and Permissions
@@ -181,7 +131,18 @@ ALL_ACCESS=true OPENAI_API_KEY=<your-api-key> npm run codex -- "Generate a JavaS
 
 ## Troubleshooting
 
-- `ERROR: OPENAI_API_KEY is not set.`: export `OPENAI_API_KEY=<your-api-key>` before running a mode.
-- `ERROR: access denied...`: use a role with the required permission or set `ALL_ACCESS=true` for local experimentation.
-- No output from the model: the runner prints `(no response)` when the SDK response does not include expected content.
-- API errors: verify your key, model availability, network access, and OpenAI account permissions.
+## Commands
+
+Run the chat example:
+
+```bash
+npm run chat -- "Explain recursion in simple terms"
+```
+
+Run the code-generation example:
+
+```bash
+npm run codex -- "Generate a JavaScript function to sort an array"
+```
+
+Both examples use the OpenAI Responses API and print deterministic fallback text when the API returns no generated content.
