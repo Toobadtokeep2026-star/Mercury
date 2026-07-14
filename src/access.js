@@ -1,5 +1,4 @@
-const DEFAULT_ROLE = process.env.USER_ROLE || "user";
-const ALL_ACCESS = String(process.env.ALL_ACCESS || "").toLowerCase() === "true";
+const ALL_ACCESS_VALUE = "true";
 
 const DEFAULT_ROLES = {
   admin: ["*"],
@@ -7,28 +6,43 @@ const DEFAULT_ROLES = {
   guest: []
 };
 
+let cachedRolesJson;
+let cachedRoles;
+
+function allAccessEnabled() {
+  return String(process.env.ALL_ACCESS || "").toLowerCase() === ALL_ACCESS_VALUE;
+}
+
+function defaultRole() {
+  return process.env.USER_ROLE || "user";
+}
+
 function getRoles() {
+  if (!process.env.ROLES_JSON) return DEFAULT_ROLES;
+  if (process.env.ROLES_JSON === cachedRolesJson) return cachedRoles;
+
+  cachedRolesJson = process.env.ROLES_JSON;
   try {
-    if (process.env.ROLES_JSON) return JSON.parse(process.env.ROLES_JSON);
+    cachedRoles = JSON.parse(process.env.ROLES_JSON);
   } catch (e) {
     // ignore parse errors and fall back to defaults
+    cachedRoles = DEFAULT_ROLES;
   }
-  return DEFAULT_ROLES;
+  return cachedRoles;
 }
 
 function hasPermission(role, permission) {
-  if (ALL_ACCESS) return true;
-  const roles = getRoles();
-  const perms = roles[role] || [];
-  if (perms.includes("*")) return true;
-  return perms.includes(permission);
+  if (allAccessEnabled()) return true;
+
+  const perms = getRoles()[role] || [];
+  return perms.includes("*") || perms.includes(permission);
 }
 
-export function can(permission, user = { role: DEFAULT_ROLE }) {
+export function can(permission, user = { role: defaultRole() }) {
   return hasPermission(user.role, permission);
 }
 
-export function ensurePermission(permission, user = { role: DEFAULT_ROLE }) {
+export function ensurePermission(permission, user = { role: defaultRole() }) {
   if (!hasPermission(user.role, permission)) {
     const err = new Error(`Permission denied: ${permission}`);
     err.code = "E_PERMISSION";
@@ -37,7 +51,7 @@ export function ensurePermission(permission, user = { role: DEFAULT_ROLE }) {
 }
 
 export function currentUser() {
-  return { role: process.env.USER_ROLE || DEFAULT_ROLE };
+  return { role: defaultRole() };
 }
 
 export default { can, ensurePermission, currentUser };

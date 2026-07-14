@@ -1,7 +1,9 @@
-import OpenAI from "openai";
 import { ensurePermission, currentUser } from "./access.js";
 
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+async function createClient() {
+  const { default: OpenAI } = await import("openai");
+  return new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+}
 
 export async function runCodexExample(prompt) {
   console.log("Running Codex reference example...");
@@ -17,6 +19,7 @@ export async function runCodexExample(prompt) {
     throw err;
   }
 
+  const client = await createClient();
   const completion = await client.completions.create({
     model: "code-davinci-002",
     prompt,
