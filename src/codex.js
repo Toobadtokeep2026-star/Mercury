@@ -1,8 +1,6 @@
 import OpenAI from "openai";
 import { ensurePermission, currentUser } from "./access.js";
 
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
 export async function runCodexExample(prompt) {
   console.log("Running Codex reference example...");
   console.log(`Prompt: ${prompt}\n`);
@@ -17,15 +15,24 @@ export async function runCodexExample(prompt) {
     throw err;
   }
 
-  const completion = await client.completions.create({
-    model: "code-davinci-002",
-    prompt,
-    max_tokens: 240,
+  const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  const completion = await client.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [
+      {
+        role: "system",
+        content: "You generate concise, readable code examples. Return only the requested code unless explanation is explicitly requested."
+      },
+      {
+        role: "user",
+        content: prompt
+      }
+    ],
     temperature: 0.2,
-    stop: ["\n\n"]
+    max_tokens: 500
   });
 
-  const text = completion.choices?.[0]?.text ?? "(no response)";
+  const text = completion.choices?.[0]?.message?.content ?? "(no response)";
   console.log("Generated code:");
   console.log(text.trim());
 }
