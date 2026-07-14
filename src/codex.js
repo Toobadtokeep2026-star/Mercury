@@ -1,4 +1,3 @@
-import OpenAI from "openai";
 import { ensurePermission, currentUser } from "./access.js";
 
 export async function runCodexExample(prompt) {

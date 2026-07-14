@@ -1,9 +1,11 @@
-import { runChatExample } from "./chat.js";
-import { runCodexExample } from "./codex.js";
-
 const [,, mode = "help", ...promptParts] = process.argv;
 const normalizedMode = mode.toLowerCase();
 const prompt = promptParts.join(" ").trim();
+
+const runners = {
+  chat: () => import("./chat.js").then(({ runChatExample }) => runChatExample),
+  codex: () => import("./codex.js").then(({ runCodexExample }) => runCodexExample)
+};
 
 const usage = () => {
   console.log("Mercury OpenAI reference project");
@@ -35,3 +37,6 @@ switch (normalizedMode) {
     await runCodexExample(prompt);
     break;
 }
+
+const run = await runners[normalizedMode]();
+await run(prompt);

@@ -40,6 +40,13 @@ Mercury is a small private Node.js reference project that demonstrates how to ru
 export ALL_ACCESS=true
 export OPENAI_API_KEY=<your-api-key>
 npm run chat -- "Explain recursion"
+npm run codex -- "Generate a JavaScript function to sort an array"
+```
+
+Enable all-access mode for local development:
+
+```bash
+ALL_ACCESS=true OPENAI_API_KEY=<your-api-key> npm run chat -- "Explain recursion"
 ```
 
 ## Access and Permissions
