@@ -2,7 +2,7 @@ import OpenAI from "openai";
 import { ensurePermission, currentUser } from "./access.js";
 
 export async function runCodexExample(prompt) {
-  console.log("Running Codex reference example...");
+  console.log("Running code-generation reference example...");
   console.log(`Prompt: ${prompt}\n`);
 
   try {

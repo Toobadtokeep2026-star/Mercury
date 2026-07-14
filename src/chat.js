@@ -29,10 +29,10 @@ export async function runChatExample(prompt) {
       }
     ],
     temperature: 0.7,
-    max_tokens: 500
+    max_output_tokens: 500
   });
 
-  const message = completion.choices?.[0]?.message?.content ?? "(no response)";
+  const message = response.output_text ?? "(no response)";
   console.log("Response:");
   console.log(message.trim());
 }
