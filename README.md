@@ -9,7 +9,7 @@ This project includes a small access utility used by the CLI examples to gate fu
 
 ```bash
 export ALL_ACCESS=true
-export OPENAI_API_KEY=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
+export OPENAI_API_KEY=<your-api-key>
 npm run chat -- "Explain recursion"
 ```
 
