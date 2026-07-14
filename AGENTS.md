@@ -21,7 +21,7 @@ Current repository characteristics:
 ```text
 .
 ├── AGENTS.md          # Instructions for Codex and future agent sessions
-├── README.md          # Human-facing project overview and usage examples
+├── README.md          # Human-facing setup, architecture, usage, and contributor guide
 ├── package.json       # npm scripts, dependency declarations, Node engine
 └── src/
     ├── access.js      # Role/permission helpers used by CLI modes
@@ -143,13 +143,13 @@ When adding a test framework in the future, wire it to `npm test` and document t
 
 - Treat API keys and tokens as secrets even in examples.
 - Never add real secrets to source files, docs, tests, fixtures, PR descriptions, or commit messages.
-- Before committing, scan documentation changes for accidental credentials.
+- Before committing, scan documentation changes for accidental credentials. If a real-looking key appears in docs, replace it with a placeholder such as `<your-api-key>` before committing.
 - Prefer environment variables for all sensitive configuration.
 - If a secret is discovered in repository history or documentation, flag it immediately and recommend rotation; do not copy it into new files.
 
 ## Documentation Conventions
 
-- Keep `README.md` user-focused: installation, environment variables, commands, and examples.
+- Keep `README.md` user-focused and contributor-ready: overview, requirements, setup, environment variables, commands, architecture, validation, extension guidance, and troubleshooting.
 - Keep `AGENTS.md` agent-focused: architecture, conventions, workflow, and repository-specific instructions.
 - Use fenced code blocks for commands and repository trees.
 - Keep command examples copy-pasteable.
