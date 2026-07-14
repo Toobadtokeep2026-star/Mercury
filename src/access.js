@@ -1,34 +1,44 @@
-const DEFAULT_ROLE = process.env.USER_ROLE || "user";
+const DEFAULT_ROLE = "user";
 const ALL_ACCESS = String(process.env.ALL_ACCESS || "").toLowerCase() === "true";
+const WILDCARD_PERMISSION = "*";
 
 const DEFAULT_ROLES = {
-  admin: ["*"],
+  admin: [WILDCARD_PERMISSION],
   user: ["chat.run", "codex.run"],
   guest: []
 };
 
+function roleFromEnvironment() {
+  return process.env.USER_ROLE || DEFAULT_ROLE;
+}
+
 function getRoles() {
+  if (!process.env.ROLES_JSON) return DEFAULT_ROLES;
+
   try {
-    if (process.env.ROLES_JSON) return JSON.parse(process.env.ROLES_JSON);
-  } catch (e) {
-    // ignore parse errors and fall back to defaults
+    return JSON.parse(process.env.ROLES_JSON);
+  } catch {
+    // Ignore parse errors and fall back to defaults.
+    return DEFAULT_ROLES;
   }
-  return DEFAULT_ROLES;
+}
+
+function permissionsForRole(role) {
+  return getRoles()[role] || [];
 }
 
 function hasPermission(role, permission) {
   if (ALL_ACCESS) return true;
-  const roles = getRoles();
-  const perms = roles[role] || [];
-  if (perms.includes("*")) return true;
-  return perms.includes(permission);
+
+  const permissions = permissionsForRole(role);
+  return permissions.includes(WILDCARD_PERMISSION) || permissions.includes(permission);
 }
 
-export function can(permission, user = { role: DEFAULT_ROLE }) {
+export function can(permission, user = currentUser()) {
   return hasPermission(user.role, permission);
 }
 
-export function ensurePermission(permission, user = { role: DEFAULT_ROLE }) {
+export function ensurePermission(permission, user = currentUser()) {
   if (!hasPermission(user.role, permission)) {
     const err = new Error(`Permission denied: ${permission}`);
     err.code = "E_PERMISSION";
@@ -37,7 +47,7 @@ export function ensurePermission(permission, user = { role: DEFAULT_ROLE }) {
 }
 
 export function currentUser() {
-  return { role: process.env.USER_ROLE || DEFAULT_ROLE };
+  return { role: roleFromEnvironment() };
 }
 
 export default { can, ensurePermission, currentUser };
